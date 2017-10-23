@@ -29,3 +29,21 @@ Status
 The script completley works, but it's obviously terrible code. I was just testing out the basic parts as fast as possible.
 
 Going forward I'd like to refactor this into a proper CLI app with a config file, and possible plugins which can generate configs for common projects like (ie a compass generator could inspect your compass configs and auto-generate watchngo configs).
+
+Prerequisites/Setup
+===================
+
+You need PHP installed with the inotify extension. The extension is installed by PECL and then compiled, so you need the PHPize dependency. To set this up on a Debian/Mint based system [(see original source)](https://askubuntu.com/questions/885574/how-does-one-install-the-pecl-inotify-extension-for-php7#885575), as root...
+
+    # apt-get install php-dev
+    # pecl install inotify
+    
+You now need to create and enable the inotify .so extension to PHP...
+
+    # touch /etc/php/7.0/mods-available/inotify.ini
+    # echo 'extension=inotify.so' > /etc/php/7.0/mods-available/inotify.ini
+    # phpenmod inotify
+
+A run of ```php -m``` should now show ```inotify``` as one of the installed modules.
+
+
